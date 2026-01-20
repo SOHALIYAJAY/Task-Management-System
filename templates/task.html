@@ -1,0 +1,31 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Task</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/task.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'task' %}">Tasks</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+    </ul>
+</nav>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+
+<script src="{% static 'js/task.js' %}"></script>
+</body>
+</html> {% endcomment %}

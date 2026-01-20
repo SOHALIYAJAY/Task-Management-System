@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Logout</title>
+    <link rel="stylesheet" href="{% static 'css/logout.css' %}">
+</head>
+<body>
+
+<div class="logout-container">
+    <h2>Confirm Logout</h2>
+
+    <p class="info-text">
+        You are about to log out of your account.  
+        After logging out, you will need to log in again to access your dashboard and tasks.
+    </p>
+
+    <p class="warning-text">
+        Make sure you have saved all your work before continuing.
+    </p>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-logout">Logout</button>
+    </form>
+
+    <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel & Go Back</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskManager | Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'task' %}">Tasks</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+    </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Organize Your Work.<br>Boost Your Productivity.</h1>
+        <p>
+            Manage tasks, track progress, and collaborate effortlessly  
+            with our smart task management system.
+        </p>
+        <div class="hero-buttons">
+            <a href="{% url 'task' %}" class="btn-primary">Get Started</a>
+            <a href="#" class="btn-secondary">View Tasks</a>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <h2>Why Choose TaskManager?</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>📋 Task Tracking</h3>
+            <p>Create, update, and monitor tasks in real time.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>👥 User Management</h3>
+            <p>Admins can manage users and assign tasks easily.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔒 Secure System</h3>
+            <p>Authentication powered by Django for maximum security.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
+
+</body>
+</html>

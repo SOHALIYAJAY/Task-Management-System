@@ -1,0 +1,164 @@
+/* ========== RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #F9FAFB;
+    color: #111827;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    height: 64px;
+    background: #0F172A;
+    padding: 0 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FACC15;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: #E5E7EB;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #FACC15;
+}
+
+/* ========== REGISTER CARD ========== */
+form {
+    max-width: 450px;
+    background: #ffffff;
+
+    margin: 80px auto;
+    padding: 32px;
+
+    border-radius: 14px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Django form fields */
+form p {
+    margin-bottom: 16px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+form input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #D1D5DB;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #6366F1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* ========== BUTTON ========== */
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+
+    background: #4F46E5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #4338CA;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(79,70,229,0.35);
+}
+
+/* ========== SIGNIN LINK ========== */
+.signin-link {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.signin-link a {
+    color: #4F46E5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signin-link a:hover {
+    text-decoration: underline;
+}
+
+/* ========== ERROR MESSAGES ========== */
+.errorlist {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #FEE2E2;
+    border-radius: 8px;
+}
+
+.errorlist li {
+    color: #DC2626;
+    font-size: 13px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 500px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    form {
+        margin: 50px 15px;
+        padding: 26px;
+    }
+}

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">TaskManager</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'task' %}">Tasks</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}    
+    <form>
+    <button type=submit>Registration</button>
+    <p class="signin-link">
+        Already Register ? <a href="{% url 'login' %}">Login in</a>
+    </p>
+
+    <script src="{% static 'js/registration.js' %}"></script>
+</body>
+</html>

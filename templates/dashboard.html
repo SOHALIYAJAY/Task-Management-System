@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'task' %}">Tasks</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+    </ul>
+</nav>
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>TaskManager</h2>
+        <ul>
+            <li class="active">Dashboard</li>
+            <li>My Tasks</li>
+            <li>Completed</li>
+            <li><a href="{% url 'profile' %}" id='profile'> Profile</a></li>
+            <li><a href="{% url 'userlogout' %}"  id='logout'>logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <h1>Dashboard</h1>
+            <button onclick="addTask()">+ Add Task</button>
+        </header>
+
+        <!-- Stats Cards -->
+        <section class="stats">
+            <div class="card">
+                <h3>Total Tasks</h3>
+                <p id="total">5</p>
+            </div>
+            <div class="card">
+                <h3>Pending</h3>
+                <p id="pending">3</p>
+            </div>
+            <div class="card">
+                <h3>Completed</h3>
+                <p id="completed">2</p>
+            </div>
+        </section>
+
+        <!-- Task List -->
+        <section class="tasks">
+            <h2>Recent Tasks</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="taskTable">
+                    <tr>
+                        <td>Design Login Page</td>
+                        <td>High</td>
+                        <td class="pending">Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Connect Django Backend</td>
+                        <td>Medium</td>
+                        <td class="completed">Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</div>
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
