@@ -1,31 +1,58 @@
-{% comment %} {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Task</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task | Task Manager</title>
     <link rel="stylesheet" href="{% static 'css/task.css' %}">
 </head>
 <body>
 <nav class="navbar">
     <div class="logo">TaskManager</div>
     <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'task' %}">Tasks</a></li>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+       <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'login'%}" class="btn-nav">Login</a></li>
     </ul>
 </nav>
+<main class="main-content">
 
+<div class="task-container">
+    <h2>Create New Task</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+    <form action="{% url 'taskcreate' %}" method='post' id="taskForm">
+        {% csrf_token %}
+        <label>Task Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter task title" required>
 
+        <label>Description</label>
+        <textarea id="description" name="description" placeholder="Enter task description" required></textarea>
 
+        <label>Priority</label>
+        <select id="priority" name="priority" required>
+            <option value="">-- Select Priority --</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+
+        <label>Due Date</label>
+        <input type="date" id="due_date" name='due_date' required>
+
+        <label>Status</label>
+        <select id="status" name="status" required>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+        </select>
+
+        <button type="submit">Create Task</button>
+    </form>
+
+    <p id="message"></p>
+</div>
+
+</main>
 <script src="{% static 'js/task.js' %}"></script>
 </body>
-</html> {% endcomment %}
+</html>

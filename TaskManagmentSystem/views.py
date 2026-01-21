@@ -3,19 +3,20 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.views.generic import ListView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-# from Task.models import Tasklist
+from accounts.admin import CustomUser
+from Task.models import Tasklist
 from django.views.generic import CreateView
 
 class home(LoginRequiredMixin,TemplateView):
     template_name='home.html'
     login_url=reverse_lazy('login')
 
-class task(LoginRequiredMixin,TemplateView):
-    template_name='task.html'
-    login_url=reverse_lazy('login')
+# class task(LoginRequiredMixin,TemplateView):
+#     template_name='task.html'
+#     login_url=reverse_lazy('login')
 
-# class taskcreate(LoginRequiredMixin, CreateView):
-#     model = Tasklist
+# # class taskcreate(LoginRequiredMixin, CreateView):
+# #     model = Tasklist
 #     template_name = 'task.html'
 #     success_url = reverse_lazy('home')
 #     login_url = reverse_lazy('login')
@@ -29,5 +30,22 @@ class dashboard(LoginRequiredMixin,TemplateView):
 class userlogout(TemplateView):
     template_name='logout.html'
 
-class profile(TemplateView):
+class userprofile(TemplateView):
     template_name='profile.html'
+
+
+def taskcreate(request):
+    n={}
+    if request.method == "POST":
+        print("POST REQUEST RECEIVED") 
+        title=request.POST.get('title')
+        description=request.POST.get('description')
+        priority=request.POST.get('priority')
+        status=request.POST.get('status')
+        due_date=request.POST.get('due_date')
+
+        Tasklist.objects.create(title=title,description=description,priority=priority,status=status,due_date=due_date)
+        print("TASK SAVED")   
+        return render(request,'home.html')
+    else:
+        return render(request,'task.html')

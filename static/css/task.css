@@ -1,48 +1,40 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    background-color: #F8FAFC;
-    color: #0F172A;
-}
 
+/* ================= NAVBAR ================= */
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    height: 64px;
+    background: #0F172A; /* dark slate */
+    padding: 0 50px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    padding: 16px 60px;
-
-    background: rgba(15, 23, 42, 0.85); /* Dark slate */
-    backdrop-filter: blur(12px);
-
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
 }
 
 .logo {
     font-size: 22px;
-    font-weight: bold;
-    color: #FACC15; /* Accent color */
+    font-weight: 700;
+    color: #FACC15;
 }
 
 .nav-links {
+    list-style: none;
     display: flex;
     gap: 26px;
-    list-style: none;
 }
 
 .nav-links a {
     color: #E5E7EB;
     text-decoration: none;
+    font-size: 15px;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -51,115 +43,94 @@ body {
     color: #FACC15;
 }
 
-.btn-nav {
-    background: #FACC15;
-    color: #111827;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+/*  
+    
+    justify-content: center;
+    align-items: center; */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.main-content {
+    min-height: calc(100vh - 64px); /* full height minus navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 64px; /* navbar height */
 }
 
-.btn-nav:hover {
-    transform: translateY(-2px);
+.page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 120px;
 }
 
-.task-wrapper {
-    width: 100%;
-    padding: 20px;
+
+.task-container {
+    background: white;
+    width: 420px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.task-card {
-    max-width: 500px;
-    margin: auto;
-    background: #ffffff;
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-}
-
-.task-card h2 {
+.task-container h2 {
     text-align: center;
-    font-size: 26px;
-    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.subtitle {
-    text-align: center;
-    font-size: 14px;
-    color: #6B7280;
-    margin-bottom: 25px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
+label {
     display: block;
     margin-bottom: 6px;
+    font-weight: bold;
     font-size: 14px;
-    font-weight: 600;
-    color: #374151;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+input, textarea, select {
     width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #D1D5DB;
-    font-size: 15px;
-    transition: all 0.25s ease;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
 }
 
-.form-group textarea {
+textarea {
     resize: none;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #6366F1;
-    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
-}
-
-.form-row {
-    display: flex;
-    gap: 15px;
+    height: 80px;
 }
 
 button {
     width: 100%;
-    margin-top: 10px;
-    padding: 14px;
-    background: #4F46E5;
+    padding: 12px;
+    background: #4f46e5;
     border: none;
     color: white;
     font-size: 16px;
-    font-weight: 600;
-    border-radius: 12px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #4338CA;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 25px rgba(79,70,229,0.4);
+    background: #4338ca;
 }
 
-.error {
-    margin-top: 12px;
+#message {
     text-align: center;
-    color: #DC2626;
+    margin-top: 15px;
     font-size: 14px;
 }
-
-@media (max-width: 520px) {
-    .form-row {
-        flex-direction: column;
-    }
+.task-container {
+    background: white;
+    width: 420px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }

@@ -27,10 +27,10 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='userlogin.html'),name='login'),
     path('logout/',LogoutView.as_view(),name='logout'),
     path('register/', Usercreate.as_view(),name='register'),
-    path('task/', views.task.as_view(),name='task'),
-#   path('taskcreate/',views.taskcreate.as_view(),name='taskcreate')
+    # path('task/', views.task.as_view(),name='task'),
+    path('taskcreate/',views.taskcreate,name='taskcreate'),
     path('mydashboard/',views.dashboard.as_view(),name='dashboard'),
     path('userlogout/',views.userlogout.as_view(),name='userlogout'),
-    path('myprofile/',views.profile.as_view(),name='profile')
+    path('myprofile/',views.userprofile.as_view(),name='profile')
 
 ]

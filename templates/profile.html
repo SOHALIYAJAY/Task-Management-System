@@ -3,71 +3,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile | Task Manager</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
 
-<div class="dashboard">
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+       <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'login'%}" class="btn-nav">Login</a></li>
+    </ul>
+</nav>
 
-    <!-- Left Profile Card -->
-    <div class="profile-card">
-        <div class="image-box">
-            <img id="profilePic" src="https://i.imgur.com/6VBx3io.png">
-            <input type="file" id="upload" hidden>
-            <label for="upload" class="upload-btn">Change</label>
+<!-- MAIN CONTENT -->
+<main class="main">
+    <div class="dashboard">
+
+        <!-- PROFILE CARD -->
+        <div class="profile-card">
+            <div class="image-box">
+                <img id="profilePic" src="https://i.imgur.com/6VBx3io.png">
+                <input type="file" id="upload" hidden>
+                <label for="upload" class="upload-btn">Change</label>
+            </div>
+
+            <h2 id="displayName">Jay Sohaliya</h2>
+            <p id="displayRole">Task Manager User</p>
+
+            <button id="editBtn">Edit Profile</button>
         </div>
 
-        <h2 id="displayName">Jay Sohaliya</h2>
-        <p id="displayRole">Task Manager User</p>
+        <!-- RIGHT CONTENT -->
+        <div class="content">
 
-        <button id="editBtn">Edit Profile</button>
+            <div class="card">
+                <h3>Personal Information</h3>
+
+                <div class="field">
+                    <span>Full Name</span>
+                    <input id="name" value="Jay Sohaliya" disabled>
+                </div>
+
+                <div class="field">
+                    <span>Email</span>
+                    <input id="email" value='{{ cust.email }}' disabled>
+                </div>
+
+                <div class="field">
+                    <span>Role</span>
+                    <input id="role" value="User" disabled>
+                </div>
+
+                <button id="saveBtn" disabled>Save Changes</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <h1>24</h1>
+                    <p>Total Tasks</p>
+                </div>
+                <div class="stat-box">
+                    <h1>18</h1>
+                    <p>Completed</p>
+                </div>
+                <div class="stat-box">
+                    <h1>6</h1>
+                    <p>Pending</p>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <!-- Right Content -->
-    <div class="content">
-
-        <!-- Info Section -->
-        <div class="card">
-            <h3>Personal Information</h3>
-
-            <div class="field">
-                <span>Full Name</span>
-                <input id="name" value="Jay Sohaliya" disabled>
-            </div>
-
-            <div class="field">
-                <span>Email</span>
-                <input id="email" value="jay@gmail.com" disabled>
-            </div>
-
-            <div class="field">
-                <span>Role</span>
-                <input id="role" value="User" disabled>
-            </div>
-
-            <button id="saveBtn" disabled>Save Changes</button>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats">
-            <div class="stat-box">
-                <h1>24</h1>
-                <p>Total Tasks</p>
-            </div>
-            <div class="stat-box">
-                <h1>18</h1>
-                <p>Completed</p>
-            </div>
-            <div class="stat-box">
-                <h1>6</h1>
-                <p>Pending</p>
-            </div>
-        </div>
-
-    </div>
-</div>
+</main>
 
 <script src="{% static 'js/profile.js' %}"></script>
 </body>

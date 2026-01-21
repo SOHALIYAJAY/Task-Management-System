@@ -12,8 +12,8 @@
 <nav class="navbar">
     <div class="logo">TaskManager</div>
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="{% url 'task' %}">Tasks</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
         <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
     </ul>
@@ -28,7 +28,7 @@
             with our smart task management system.
         </p>
         <div class="hero-buttons">
-            <a href="{% url 'task' %}" class="btn-primary">Get Started</a>
+            <a href="{% url 'taskcreate' %}" class="btn-primary">Get Started</a>
             <a href="#" class="btn-secondary">View Tasks</a>
         </div>
     </div>
