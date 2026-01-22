@@ -49,3 +49,14 @@ def taskcreate(request):
         return render(request,'home.html')
     else:
         return render(request,'task.html')
+
+class mytask(TemplateView):
+    template_name='mytask.html'
+
+        
+class taskconect(ListView):
+    model=Tasklist
+    template_name='mytask.html'
+    context_object_name='tasklist'
+    def get_queryset(self):
+        return Tasklist.objects.all() 
