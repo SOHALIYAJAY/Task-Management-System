@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Tasks | Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/mytask.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Create Task</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    </ul>
+</nav>
+
+<main class="page">
+
+<section class="task-wrapper">
+
+    <!-- HEADER -->
+    <div class="task-header">
+        <div>
+            <h1>My Tasks</h1>
+            <p class="subtitle">Manage, track and complete your daily work</p>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="🔍 Search tasks..." />
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <button class="active" onclick="filterTasks('all')">All</button>
+        <button onclick="filterTasks('Pending')">Pending</button>
+        <button onclick="filterTasks('Completed')">Completed</button>
+    </div>
+
+    <!-- COUNTS -->
+    <div class="summary">
+        <span id="allCount">All: 0</span>
+        <span id="pendingCount">Pending: 0</span>
+        <span id="completedCount">Completed: 0</span>
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="task-list" id="taskList">
+
+        {% for task in tasklist %}
+        <div class="task-row {{ task.priority|lower }}" 
+             data-status="{{ task.status }}" 
+             data-title="{{ task.title|lower }} {{ task.description|lower }}">
+
+            <div class="task-main">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+            </div>
+
+            <div class="task-badges">
+                <span class="badge priority {{ task.priority|lower }}">
+                    {{ task.priority }}
+                </span>
+                <button class="badge status {{ task.status|lower }}"
+                        onclick="toggleStatus(this)">
+                    {{ task.status }}
+                </button>
+            </div>
+
+            <div class="task-meta">
+                <span class="date">
+                    {% if task.due_date %}
+                        📅 {{ task.due_date }}
+                    {% else %}
+                        No date
+                    {% endif %}
+                </span>
+
+                <button class="delete-btn" onclick="confirmDelete({{ task.id }})">
+                    🗑 Delete
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty">No tasks yet. Start by creating one 🚀</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+</main>
+
+<script src="{% static 'js/mytask.js' %}"></script>
+</body>
+</html>
