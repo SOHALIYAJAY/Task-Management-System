@@ -32,6 +32,10 @@ urlpatterns = [
     path('mydashboard/',views.dashboard.as_view(),name='dashboard'),
     path('userlogout/',views.userlogout.as_view(),name='userlogout'),
     path('myprofile/',views.userprofile.as_view(),name='profile'),
-    path('mytask/',views.taskconect.as_view(),name='mytask')
+    path('mytask/',views.taskconect.as_view(),name='mytask'),
+    path('task/delete/<int:pk>/',views.deletetask.as_view(),name='taskdelete'),
+    path('searchmytask/',views.searchtask.as_view(),name='searchmytask'),
+    path('task/update/<int:pk>',views.updatetask.as_view(),name='updatetask'),
+    path('mycompletetask/',views.completetask.as_view(),name='completetask')
 
 ]
