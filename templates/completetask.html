@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Task</title>
+    <link rel="stylesheet" href="{% static 'css/completetask.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+</nav>
+
+<div class="page-wrapper">
+    <div class="container">
+        <h2>✅ Complete Task</h2>
+        <p class="info">Are you sure you want to mark this task as completed?</p>
+
+        <div class="task-box">
+            <h3>None</h3>
+            <p>None</p>
+            <span class="badge pending">Pending</span>
+        </div>
+
+        <div class="actions">
+            <button class="complete-btn">✔ Mark as Completed</button>
+            <button class="cancel-btn">✖ Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/completetask.js' %}"></script>
+</body>
+</html>
