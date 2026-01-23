@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background: #f1f5f9;
+    min-height: 100vh;
+}
+
+/* PAGE LAYOUT */
+
+
+/* ================= NAVBAR ================= */
+.navbar {
+    height: 64px;
+    background: #0F172A; /* dark slate */
+    padding: 0 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FACC15;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: #E5E7EB;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #FACC15;
+}
+
+
+.container {
+    background: white;
+    padding: 25px;
+    width: 380px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.info {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.task-box {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.task-box h3 {
+    margin-bottom: 5px;
+}
+
+.task-box p {
+    font-size: 13px;
+    color: #666;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.pending {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.complete-btn {
+    background: #22c55e;
+    color: white;
+}
+
+.complete-btn:hover {
+    background: #16a34a;
+}
+
+.cancel-btn {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.cancel-btn:hover {
+    background: #fecaca;
+}
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 20px;
+}
