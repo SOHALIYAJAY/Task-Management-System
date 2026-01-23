@@ -1,11 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,HttpResponse
-from django.views.generic import ListView,TemplateView
+from django.views.generic import ListView,TemplateView,CreateView,DeleteView,View,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from accounts.admin import CustomUser
 from Task.models import Tasklist
-from django.views.generic import CreateView
 
 class home(LoginRequiredMixin,TemplateView):
     template_name='home.html'
@@ -26,6 +25,15 @@ class home(LoginRequiredMixin,TemplateView):
 class dashboard(LoginRequiredMixin,TemplateView):
     template_name='dashboard.html'
     login_url=reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['task']=Tasklist.objects.all()
+        context['totaltask']=Tasklist.objects.all().count()
+        context['pendingtask']=Tasklist.objects.filter(status='Pending').count()
+        context['completetask']=context['totaltask']-context['pendingtask']
+
+        return context
 
 class userlogout(TemplateView):
     template_name='logout.html'
@@ -59,4 +67,55 @@ class taskconect(ListView):
     template_name='mytask.html'
     context_object_name='tasklist'
     def get_queryset(self):
-        return Tasklist.objects.all() 
+        return Tasklist.objects.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['totaltask']=Tasklist.objects.all().count()
+        context['pendingtask']=Tasklist.objects.filter(status='Pending').count()
+        context['completetask']=Tasklist.objects.all().count()-Tasklist.objects.filter(status='Pending').count()
+
+        return context
+
+class deletetask(DeleteView):
+    model=Tasklist 
+    success_url=reverse_lazy('mytask')
+
+# def searchmytask(request):
+#     TASK={}
+#     if request.method=='POST':
+#         taskname=request.POST.get('searchmytask')
+#         newtask=Tasklist.objects.filter(title__icontains=taskname)
+#         TASK={
+#             "newtask":newtask
+#         }
+#         return render(request,"mytask.html",TASK)
+#     newtask=Tasklist.objects.all
+#     return render(request,"mytask.html",TASK)
+
+class searchtask(ListView):
+    model=Tasklist
+    template_name='mytask.html'
+    context_object_name='tasklist'
+    def get_queryset(self):
+        return Tasklist.objects.filter(title__icontains=self.request.GET.get('searchtask'))
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['totaltask']=Tasklist.objects.filter(title__icontains=self.request.GET.get('searchtask')).count()
+        context['pendingtask']=Tasklist.objects.filter( title__icontains=self.request.GET.get('searchtask'),status='Pending' ).count()
+        context['completetask']=context['totaltask']-context['pendingtask']
+
+        return context
+    
+class updatetask(UpdateView,TemplateView):
+    model=Tasklist
+    fields='__all__'
+    template_name='updatetask.html'
+    success_url=reverse_lazy('mytask')
+
+class completetask(ListView):
+    model=Tasklist
+    template_name='completetask.html'
+    context_object_name='task'
+
+    def get_queryset(self):
+        return Tasklist.objects.filter(status='Pending')
