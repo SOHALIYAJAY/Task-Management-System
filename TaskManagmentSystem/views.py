@@ -80,18 +80,6 @@ class deletetask(DeleteView):
     model=Tasklist 
     success_url=reverse_lazy('mytask')
 
-# def searchmytask(request):
-#     TASK={}
-#     if request.method=='POST':
-#         taskname=request.POST.get('searchmytask')
-#         newtask=Tasklist.objects.filter(title__icontains=taskname)
-#         TASK={
-#             "newtask":newtask
-#         }
-#         return render(request,"mytask.html",TASK)
-#     newtask=Tasklist.objects.all
-#     return render(request,"mytask.html",TASK)
-
 class searchtask(ListView):
     model=Tasklist
     template_name='mytask.html'
@@ -108,7 +96,7 @@ class searchtask(ListView):
     
 class updatetask(UpdateView,TemplateView):
     model=Tasklist
-    fields='__all__'
+    fields=['title','description','priority','due_date']
     template_name='updatetask.html'
     success_url=reverse_lazy('mytask')
 
@@ -119,3 +107,10 @@ class completetask(ListView):
 
     def get_queryset(self):
         return Tasklist.objects.filter(status='Pending')
+    
+class changetask(View):
+    def get(self,request,pk):
+        tc=Tasklist.objects.get(pk=pk)
+        tc.status='Completed'
+        tc.save()
+        return render(request,'home.html')
