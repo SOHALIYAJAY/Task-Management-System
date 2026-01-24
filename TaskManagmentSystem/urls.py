@@ -36,6 +36,8 @@ urlpatterns = [
     path('task/delete/<int:pk>/',views.deletetask.as_view(),name='taskdelete'),
     path('searchmytask/',views.searchtask.as_view(),name='searchmytask'),
     path('task/update/<int:pk>',views.updatetask.as_view(),name='updatetask'),
-    path('mycompletetask/',views.completetask.as_view(),name='completetask')
+    path('mycompletetask/',views.completetask.as_view(),name='completetask'),
+    path('completetask/',views.completetask.as_view(),name='completetask'),
+    path('changetask/<int:pk>/',views.changetask.as_view(),name='changetask')
 
 ]
