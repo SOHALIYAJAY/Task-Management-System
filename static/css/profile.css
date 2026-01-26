@@ -1,82 +1,61 @@
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-}
-
-/* BODY FIX */
-body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    min-height: 100vh;
+    font-family: "Inter", Arial, sans-serif;
 }
 
 /* NAVBAR */
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
+    height: 64px;
+    background: #0f172a;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 16px 60px;
-    background: #1f2933;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .logo {
+    color: #facc15;
     font-size: 22px;
-    font-weight: bold;
-    color: #FACC15;
+    font-weight: 700;
 }
 
 .nav-links {
     display: flex;
-    gap: 26px;
+    gap: 24px;
     list-style: none;
 }
 
 .nav-links a {
-    color: #E5E7EB;
+    color: #e5e7eb;
     text-decoration: none;
-    font-weight: 500;
 }
 
-.nav-links a:hover {
-    color: #FACC15;
+/* BACKGROUND */
+body {
+    background: linear-gradient(135deg, #6a7cf5, #7c5ac8);
+    min-height: 100vh;
 }
 
-.btn-nav {
-    /* background: #FACC15; */
-    color: #111827;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-/* MAIN FIX */
+/* MAIN */
 .main {
-    display: flex;
-    justify-content: center;
     padding: 50px 20px;
 }
 
-/* DASHBOARD */
-.dashboard {
-    width: 100%;
+.dashboard-container {
     max-width: 1100px;
+    margin: auto;
     display: grid;
     grid-template-columns: 300px 1fr;
-    gap: 25px;
+    gap: 30px;
 }
 
 /* PROFILE CARD */
 .profile-card {
     background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
     padding: 30px;
     text-align: center;
     color: white;
@@ -84,33 +63,44 @@ body {
 
 .image-box {
     position: relative;
-    width: 130px;
-    margin: auto;
+    margin-bottom: 20px;
 }
 
 .image-box img {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    border: 4px solid white;
+    border: 4px solid #fff;
 }
 
 .upload-btn {
     position: absolute;
     bottom: 5px;
-    right: 5px;
-    background: #4CAF50;
-    padding: 5px 10px;
-    font-size: 12px;
+    right: 50%;
+    transform: translateX(50%);
+    background: #22c55e;
+    padding: 6px 14px;
     border-radius: 20px;
+    font-size: 12px;
     cursor: pointer;
+    color: white;
 }
 
-.profile-card button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border-radius: 30px;
-    border: none;
+.profile-card h2 {
+    margin-top: 10px;
+}
+
+.profile-card .email {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+#editBtn {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fde68a;
+    text-decoration: underline;
 }
 
 /* CONTENT */
@@ -120,51 +110,81 @@ body {
     gap: 25px;
 }
 
+/* INFO CARD */
 .card {
     background: white;
-    border-radius: 15px;
-    padding: 25px;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    margin-bottom: 20px;
 }
 
 .field {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
-.field span {
+.field label {
     font-size: 13px;
-    color: gray;
+    color: #666;
 }
 
 .field input {
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #ddd;
-    padding: 8px 5px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
 }
 
 #saveBtn {
     margin-top: 10px;
-    padding: 12px;
+    padding: 10px 16px;
     border-radius: 10px;
-    background: #667eea;
-    color: white;
     border: none;
+    background: #6a7cf5;
+    color: white;
+    cursor: not-allowed;
 }
 
 /* STATS */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 20px;
 }
 
 .stat-box {
     background: white;
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 16px;
+    padding: 25px;
     text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .stat-box h1 {
-    color: #667eea;
+    font-size: 36px;
+    color: #6a7cf5;
+}
+
+.stat-box p {
+    font-size: 14px;
+    color: #555;
+}
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+footer.footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #0f172a;
+    color: #e5e7eb;
+    margin-top: 40px;
 }
