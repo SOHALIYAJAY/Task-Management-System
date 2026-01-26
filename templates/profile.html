@@ -15,70 +15,71 @@
        <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-nav">Login</a></li>
+        <li><a href="{% url 'profile' %}" >Profile</a></li>
     </ul>
 </nav>
-
-<!-- MAIN CONTENT -->
 <main class="main">
-    <div class="dashboard">
+    <div class="dashboard-container">
 
         <!-- PROFILE CARD -->
-        <div class="profile-card">
+        <aside class="profile-card">
             <div class="image-box">
                 <img id="profilePic" src="https://i.imgur.com/6VBx3io.png">
                 <input type="file" id="upload" hidden>
                 <label for="upload" class="upload-btn">Change</label>
             </div>
 
-            <h2 id="displayName">Jay Sohaliya</h2>
-            <p id="displayRole">Task Manager User</p>
+            <h2>{{ request.user.name|default:"User" }}</h2>
+            <p class="email">{{ request.user.email }}</p>
 
-            <button id="editBtn">Edit Profile</button>
-        </div>
+            <a href="#" id="editBtn">Edit Profile</a>
+        </aside>
 
-        <!-- RIGHT CONTENT -->
-        <div class="content">
+        <!-- CONTENT -->
+        <section class="content">
 
             <div class="card">
                 <h3>Personal Information</h3>
 
                 <div class="field">
-                    <span>Full Name</span>
-                    <input id="name" value="Jay Sohaliya" disabled>
+                    <label>Full Name</label>
+                    <input value="{{ request.user.name }}" disabled>
                 </div>
 
                 <div class="field">
-                    <span>Email</span>
-                    <input id="email" value='{{ cust.email }}' disabled>
+                    <label>Email</label>
+                    <input value="{{ request.user.email }}" disabled>
                 </div>
 
                 <div class="field">
-                    <span>Role</span>
-                    <input id="role" value="User" disabled>
+                    <label>Phone</label>
+                    <input value="{{ request.user.phone|default:'Not set' }}" disabled>
                 </div>
 
-                <button id="saveBtn" disabled>Save Changes</button>
+                <button id="saveBtn" type="submit" disabled>Save Changes</button>
             </div>
 
             <div class="stats">
                 <div class="stat-box">
-                    <h1>24</h1>
+                    <h1>{{ totaltask }}</h1>
                     <p>Total Tasks</p>
                 </div>
                 <div class="stat-box">
-                    <h1>18</h1>
+                    <h1>{{ completetask }}</h1>
                     <p>Completed</p>
                 </div>
                 <div class="stat-box">
-                    <h1>6</h1>
+                    <h1>{{ pendingtask }}</h1>
                     <p>Pending</p>
                 </div>
             </div>
 
-        </div>
+        </section>
     </div>
 </main>
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
 
 <script src="{% static 'js/profile.js' %}"></script>
 </body>
