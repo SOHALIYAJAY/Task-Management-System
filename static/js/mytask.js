@@ -3,7 +3,7 @@ function filterTasks(status) {
     const buttons = document.querySelectorAll(".filters button");
 
     buttons.forEach(btn => btn.classList.remove("active"));
-    event.target.classList.add("active");
+    // event.target.classList.add("active");
 
     rows.forEach(row => {
         if (status === "all" || row.dataset.status === status) {
@@ -14,11 +14,6 @@ function filterTasks(status) {
     });
 }
 
-function confirmDelete(id) {
-    if (confirm("Are you sure you want to delete this task?")) {
-        window.location.href = `/task/delete/${id}/`;
-    }
-}
 
 /* STATUS TOGGLE (UI ONLY) */
 function toggleStatus(btn) {
