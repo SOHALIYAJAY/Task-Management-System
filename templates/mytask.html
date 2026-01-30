@@ -3,11 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Tasks | Task Manager</title>
+    <title>My Tasks | TaskManager</title>
     <link rel="stylesheet" href="{% static 'css/mytask.css' %}">
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
     <div class="logo">TaskManager</div>
     <ul class="nav-links">
@@ -16,58 +17,63 @@
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
     </ul>
 </nav>
-
+<br><br><br><br><br><br><br><br>
 <main class="page">
-
 <section class="task-wrapper">
 
     <!-- HEADER -->
     <div class="task-header">
         <div>
             <h1>My Tasks</h1>
+            
             <p class="subtitle">Manage, track and complete your daily work</p>
         </div>
 
-        <input type="text" id="searchInput" placeholder="🔍 Search tasks..." />
+        <form class="task-search-form">
+            <input type="text" id="searchInput" placeholder="search your task">
+            <button type="button">Search</button>
+        </form>
     </div>
 
     <!-- FILTERS -->
     <div class="filters">
-        <button class="active" onclick="filterTasks('all')">All</button>
-        <button onclick="filterTasks('Pending')">Pending</button>
-        <button onclick="filterTasks('Completed')">Completed</button>
+        <button class="active" onclick="filterTasks('all', this)">All</button>
+        <button onclick="filterTasks('Pending', this)">Pending</button>
+        <button onclick="filterTasks('Completed', this)">Completed</button>
     </div>
 
     <!-- COUNTS -->
     <div class="summary">
-        <span id="allCount">All: 0</span>
-        <span id="pendingCount">Pending: 0</span>
-        <span id="completedCount">Completed: 0</span>
+        <span>All: {{ totaltask }}</span>
+        <span>Pending: {{ pendingtask }}</span>
+        <span>Completed: {{ completetask }}</span>
     </div>
 
     <!-- TASK LIST -->
-    <div class="task-list" id="taskList">
+    <div class="task-list">
 
         {% for task in tasklist %}
-        <div class="task-row {{ task.priority|lower }}" 
-             data-status="{{ task.status }}" 
+        <div class="task-row {{ task.priority|lower }}"
+             data-status="{{ task.status }}"
              data-title="{{ task.title|lower }} {{ task.description|lower }}">
 
+            <!-- LEFT -->
             <div class="task-main">
                 <h3>{{ task.title }}</h3>
                 <p>{{ task.description }}</p>
             </div>
 
+            <!-- MIDDLE -->
             <div class="task-badges">
                 <span class="badge priority {{ task.priority|lower }}">
                     {{ task.priority }}
                 </span>
-                <button class="badge status {{ task.status|lower }}"
-                        onclick="toggleStatus(this)">
+                <span class="badge status {{ task.status|lower }}">
                     {{ task.status }}
-                </button>
+                </span>
             </div>
 
+            <!-- RIGHT -->
             <div class="task-meta">
                 <span class="date">
                     {% if task.due_date %}
@@ -77,20 +83,30 @@
                     {% endif %}
                 </span>
 
-                <button class="delete-btn" onclick="confirmDelete({{ task.id }})">
-                    🗑 Delete
-                </button>
+                <form action="{% url 'taskdelete' task.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="delete-btn">🗑 Delete</button>
+                </form>
+
+                <form action="{% url 'updatetask' task.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="update-btn">↻ Update</button>
+                </form>
             </div>
         </div>
         {% empty %}
-        <p class="empty">No tasks yet. Start by creating one 🚀</p>
+        <p class="empty">No tasks yet 🚀</p>
         {% endfor %}
 
     </div>
 
 </section>
 </main>
+<br><br><br><br><br>
 
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
 <script src="{% static 'js/mytask.js' %}"></script>
 </body>
 </html>
