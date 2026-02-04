@@ -27,7 +27,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='userlogin.html'),name='login'),
     path('logout/',LogoutView.as_view(),name='logout'),
     path('register/', Usercreate.as_view(),name='register'),
-    # path('task/', views.task.as_view(),name='task'),
     path('taskcreate/',views.taskcreate,name='taskcreate'),
     path('mydashboard/',views.dashboard.as_view(),name='dashboard'),
     path('userlogout/',views.userlogout.as_view(),name='userlogout'),
@@ -38,6 +37,7 @@ urlpatterns = [
     path('task/update/<int:pk>',views.updatetask.as_view(),name='updatetask'),
     path('mycompletetask/',views.completetask.as_view(),name='completetask'),
     path('completetask/',views.completetask.as_view(),name='completetask'),
-    path('changetask/<int:pk>/',views.changetask.as_view(),name='changetask')
+    path('changetask/<int:pk>/',views.changetask.as_view(),name='changetask'),
+    path('chageprofile/',views.chageprofile,name='chageprofile')
 
 ]
