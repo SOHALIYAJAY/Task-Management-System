@@ -11,30 +11,21 @@ class home(LoginRequiredMixin,TemplateView):
     template_name='home.html'
     login_url=reverse_lazy('login')
 
-    
-    
-# class task(LoginRequiredMixin,TemplateView):
-#     template_name='task.html'
-#     login_url=reverse_lazy('login')
-
-# # class taskcreate(LoginRequiredMixin, CreateView):
-# #     model = Tasklist
-#     template_name = 'task.html'
-#     success_url = reverse_lazy('home')
-#     login_url = reverse_lazy('login')
-
-#     fields = ['title', 'description', 'priority', 'status', 'due_date']
-
 class dashboard(TemplateView):
     template_name='dashboard.html'
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
+        progress = 0
+        user=self.request.user
         context['task']=Tasklist.objects.filter(user=self.request.user)
         context['totaltask']=Tasklist.objects.filter(user=self.request.user).count()
         context['pendingtask']=Tasklist.objects.filter(status='Pending',user=self.request.user).count()
         context['completetask']=context['totaltask']-context['pendingtask']
-
+        # context['user']=CustomUser.objects.get(user=self.request.user)
+        if context['totaltask'] > 0:
+             progress = (context['completetask'] / context['totaltask']) * 100
+        context['progress']=progress
         return context
 
 class userlogout(TemplateView):
@@ -45,8 +36,8 @@ class userprofile(TemplateView):
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
-        context['totaltask']=Tasklist.objects.all().count()
-        context['completetask']=Tasklist.objects.filter(status='Completed').count()
+        context['totaltask']=Tasklist.objects.filter(user=self.request.user).count()
+        context['completetask']=Tasklist.objects.filter(status='Completed',user=self.request.user).count()
         context['pendingtask']=context['totaltask']-context['completetask']
 
         return context
@@ -64,7 +55,8 @@ def taskcreate(request):
 
         Tasklist.objects.create(user=request.user,title=title,description=description,priority=priority,status=status,due_date=due_date)
         print("TASK SAVED")   
-        return render(request,'home.html')
+        messages.success(request,'Task Created Successfully')
+        return render(request,'task.html')
     else:
         return render(request,'task.html')
 
@@ -116,11 +108,23 @@ class completetask(ListView):
     context_object_name='task'
 
     def get_queryset(self):
-        return Tasklist.objects.filter(status='Pending')
+        return Tasklist.objects.filter(status='Pending',user=self.request.user) 
     
 class changetask(View):
     def get(self,request,pk):
         tc=Tasklist.objects.get(pk=pk)
         tc.status='Completed'
         tc.save()
-        return render(request,'home.html')
+        return redirect('mytask')
+
+def chageprofile(request):
+    if request.method == 'POST':
+        user=request.user
+        user.name=request.POST.get('name')
+        user.email=request.POST.get('email')
+        user.phone=request.POST.get('phone')
+
+        user.save()
+        # user.refresh_from_db()
+        return render(request,'profile.html')
+    return HttpResponse('dgewg')
