@@ -15,7 +15,7 @@ body {
 /* ================= NAVBAR ================= */
 .navbar {
     height: 64px;
-    background: #0F172A; /* dark slate */
+  background: #0F172A; /* dark slate */
     padding: 0 50px;
 
     display: flex;

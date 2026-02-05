@@ -19,6 +19,8 @@ from django.urls import path
 from TaskManagmentSystem import views
 from django.contrib.auth.views import LoginView,LogoutView
 from accounts.views import Usercreate
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -27,10 +29,19 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='userlogin.html'),name='login'),
     path('logout/',LogoutView.as_view(),name='logout'),
     path('register/', Usercreate.as_view(),name='register'),
-    # path('task/', views.task.as_view(),name='task'),
     path('taskcreate/',views.taskcreate,name='taskcreate'),
     path('mydashboard/',views.dashboard.as_view(),name='dashboard'),
     path('userlogout/',views.userlogout.as_view(),name='userlogout'),
-    path('myprofile/',views.userprofile.as_view(),name='profile')
+    path('myprofile/',views.userprofile.as_view(),name='profile'),
+    path('mytask/',views.taskconect.as_view(),name='mytask'),
+    path('task/delete/<int:pk>/',views.deletetask.as_view(),name='taskdelete'),
+    path('searchmytask/',views.searchtask.as_view(),name='searchmytask'),
+    path('task/update/<int:pk>',views.updatetask.as_view(),name='updatetask'),
+    path('mycompletetask/',views.completetask.as_view(),name='completetask'),
+    path('completetask/',views.completetask.as_view(),name='completetask'),
+    path('changetask/<int:pk>/',views.changetask.as_view(),name='changetask'),
+    path('chageprofile/',views.chageprofile,name='chageprofile')
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

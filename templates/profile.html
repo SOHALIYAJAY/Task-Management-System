@@ -1,85 +1,94 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile | Task Manager</title>
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-</head>
-<body>
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile | TaskManager</title>
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    </head>
+    <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="logo">TaskManager</div>
-    <ul class="nav-links">
-       <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-nav">Login</a></li>
-    </ul>
-</nav>
+    <nav class="navbar">
+        <div class="logo">TaskManager</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'profile' %}" >Profile</a></li>
+        </ul>
+    </nav>
+    <br><br>    
+    <main class="profile-wrapper">
 
-<!-- MAIN CONTENT -->
-<main class="main">
-    <div class="dashboard">
+        <!-- LEFT PROFILE CARD -->
+        <section class="profile-card">
+     <div class="profile-img-wrapper">
+        <img src="{{ userprofile }}" alt="user-profile">
+   </div>
 
-        <!-- PROFILE CARD -->
-        <div class="profile-card">
-            <div class="image-box">
-                <img id="profilePic" src="https://i.imgur.com/6VBx3io.png">
-                <input type="file" id="upload" hidden>
-                <label for="upload" class="upload-btn">Change</label>
-            </div>
 
-            <h2 id="displayName">Jay Sohaliya</h2>
-            <p id="displayRole">Task Manager User</p>
+            <h2 id="p-name">{{ request.user.name }}</h2>
+            <p id="p-role">{{ request.user.email }}</p>
 
-            <button id="editBtn">Edit Profile</button>
-        </div>
-
-        <!-- RIGHT CONTENT -->
-        <div class="content">
-
-            <div class="card">
-                <h3>Personal Information</h3>
-
-                <div class="field">
-                    <span>Full Name</span>
-                    <input id="name" value="Jay Sohaliya" disabled>
+            <div class="quick-stats">
+                <div>
+                    <span id="total">{{ totaltask }}</span>
+                    <small>Total Task</small>
                 </div>
-
-                <div class="field">
-                    <span>Email</span>
-                    <input id="email" value='{{ cust.email }}' disabled>
+                <div>
+                    <span id="done">{{ completetask }}</span>
+                    <small>Completed Task</small>
                 </div>
-
-                <div class="field">
-                    <span>Role</span>
-                    <input id="role" value="User" disabled>
-                </div>
-
-                <button id="saveBtn" disabled>Save Changes</button>
-            </div>
-
-            <div class="stats">
-                <div class="stat-box">
-                    <h1>24</h1>
-                    <p>Total Tasks</p>
-                </div>
-                <div class="stat-box">
-                    <h1>18</h1>
-                    <p>Completed</p>
-                </div>
-                <div class="stat-box">
-                    <h1>6</h1>
-                    <p>Pending</p>
+                <div>
+                    <span id="pending">{{ pendingtask }}</span>
+                    <small>Pending Task </small>
                 </div>
             </div>
 
-        </div>
-    </div>
-</main>
+            <button class="edit-btn" onclick="toggleEdit()">Edit Profile</button>
+        </section>
 
-<script src="{% static 'js/profile.js' %}"></script>
-</body>
-</html>
+        <!-- RIGHT DETAILS -->
+        <section class="profile-details">
+            <h3>Account Details</h3>
+
+            <form id="profileForm"  method='post' action="{% url 'chageprofile' %}">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" id="name" value="{{ request.user.name }}" name='name' readonly>
+                </div>
+
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="email" value="{{ request.user.email}}" name='email' readonly>
+                </div>
+
+                <div class="field">
+                    <label>Phone</label>
+                    <input type="text" id="phone" value="{{ request.user.phone }}" name='phone' readonly>
+                </div>
+
+                <div class="field">
+                    <label>Bio</label>
+                    <textarea id="bio" readonly name='bio'>
+    Building clean UI & backend logic 🚀
+                    </textarea>
+                </div>
+                
+                <button type="submit" class="save-btn" >Save Changes</button>
+
+                
+            </form>
+        </section>
+
+    </main>
+    <br><br><br><br><br>
+
+    <footer>
+        © 2026 TaskManager · Built with Django ❤️
+    </footer>
+
+    <script src="{% static 'js/profile.js' %}"></script>
+    </body>
+    </html>

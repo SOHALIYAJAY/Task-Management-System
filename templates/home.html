@@ -15,9 +15,20 @@
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+        <li><a href="{% url 'profile' %}" >Profile</a></li>
     </ul>
 </nav>
+{% if messages %}
+  <div class="message-container">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+        <span class="alert-text">{{ message }}</span>
+        <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -29,7 +40,7 @@
         </p>
         <div class="hero-buttons">
             <a href="{% url 'taskcreate' %}" class="btn-primary">Get Started</a>
-            <a href="#" class="btn-secondary">View Tasks</a>
+            <a href="{% url 'mytask' %}" class="btn-secondary">View Tasks</a>
         </div>
     </div>
 </section>

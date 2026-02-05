@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Tasks | TaskManager</title>
+    <link rel="stylesheet" href="{% static 'css/mytask.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Create Task</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    </ul>
+</nav>
+<br><br><br><br><br><br><br><br>
+<main class="page">
+<section class="task-wrapper">
+
+    <!-- HEADER -->
+    <div class="task-header">
+        <div>
+            <h1>My Tasks</h1>
+            
+            <p class="subtitle">Manage, track and complete your daily work</p>
+        </div>
+
+        <form class="task-search-form">
+            <input type="text" id="searchInput" placeholder="search your task">
+            <button type="button">Search</button>
+        </form>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <button class="active" onclick="filterTasks('all', this)">All</button>
+        <button onclick="filterTasks('Pending', this)">Pending</button>
+        <button onclick="filterTasks('Completed', this)">Completed</button>
+    </div>
+
+    <!-- COUNTS -->
+    <div class="summary">
+        <span>All: {{ totaltask }}</span>
+        <span>Pending: {{ pendingtask }}</span>
+        <span>Completed: {{ completetask }}</span>
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="task-list">
+
+        {% for task in tasklist %}
+        <div class="task-row {{ task.priority|lower }}"
+             data-status="{{ task.status }}"
+             data-title="{{ task.title|lower }} {{ task.description|lower }}">
+
+            <!-- LEFT -->
+            <div class="task-main">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+            </div>
+
+            <!-- MIDDLE -->
+            <div class="task-badges">
+                <span class="badge priority {{ task.priority|lower }}">
+                    {{ task.priority }}
+                </span>
+                <span class="badge status {{ task.status|lower }}">
+                    {{ task.status }}
+                </span>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="task-meta">
+                <span class="date">
+                    {% if task.due_date %}
+                        📅 {{ task.due_date }}
+                    {% else %}
+                        No date
+                    {% endif %}
+                </span>
+
+                <form action="{% url 'taskdelete' task.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="delete-btn">🗑 Delete</button>
+                </form>
+
+                <form action="{% url 'updatetask' task.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="update-btn">↻ Update</button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty">No tasks yet 🚀</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+</main>
+<br><br><br><br><br>
+
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
+<script src="{% static 'js/mytask.js' %}"></script>
+</body>
+</html>

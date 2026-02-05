@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending Tasks</title>
+    <link rel="stylesheet" href="{% static 'css/completetask.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">TaskManager</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'profile' %}">profile</a></li>
+    </ul>
+</nav>
+
+<section class="page">
+    <h2>🕒 Pending Tasks</h2>
+    <p class="subtitle">Manage and complete your pending work</p>
+
+    <div class="task-grid">
+
+        {% for i in task %}
+        <div class="task-card">
+            <h3>{{ i.title }}</h3>
+            <p>{{ i.description }}</p>
+
+            <span class="badge pending">Pending</span>
+
+            <div class="actions">
+                <a href="{% url 'changetask' i.pk  %}" class="complete-btn">✔ Complete</a>
+                
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+<br><br><br><br><br>
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
+</body>
+</html>

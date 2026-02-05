@@ -13,9 +13,10 @@
        <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-nav">Login</a></li>
+      <li><a href="{% url 'profile' %}" >Profile</a></li>
     </ul>
 </nav>
+<br>
 <main class="main-content">
 
 <div class="task-container">
@@ -52,7 +53,13 @@
     <p id="message"></p>
 </div>
 
+
+
 </main>
+<br><br><br><br><br>
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
 <script src="{% static 'js/task.js' %}"></script>
 </body>
 </html>

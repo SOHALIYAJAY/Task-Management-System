@@ -5,12 +5,13 @@ from accounts.models import CustomUser
 User=get_user_model()
 
 class UserRegistrationForm(forms.ModelForm):
+    
     password1=forms.CharField(widget=forms.PasswordInput)
     password2=forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model=CustomUser
-        fields=['email','phone','age','password1','password2']
+        fields=['name','email','phone','password1','password2']
 
 
         def clean(self):

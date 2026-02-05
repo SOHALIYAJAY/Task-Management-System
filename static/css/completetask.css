@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 64px;
+    background: #0F172A;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.logo {
+    color: #facc15;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #e5e7eb;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+/* PAGE */
+.page {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.page h2 {
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* TASK GRID */
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* TASK CARD */
+.task-card {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    text-align: left;
+}
+
+.task-card h3 {
+    margin-bottom: 6px;
+}
+
+.task-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* BADGE */
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+.pending {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+/* ACTION BUTTONS */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.actions a {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.complete-btn {
+    background: #22c55e;
+    color: white;
+}
+
+.complete-btn:hover {
+    background: #16a34a;
+}
+
+.cancel-btn {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.cancel-btn:hover {
+    background: #fecaca;
+}
+
+/* FOOTER */
+.footer {
+    background: #0F172A;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}

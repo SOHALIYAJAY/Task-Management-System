@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-+d3oqlbbeve^b@dmd50#zruatwp_nd4xhqf2cn-zp-tim4$5mq
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# EMAIL_HOST_PASSWORD = 'YOUR_16_CHAR_APP_PASSWORD'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'monata123123@gmail.com'
+# EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -38,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Task'
-    
+    'Task',
+    'rest_framework'   
 ]
 AUTH_USER_MODEL='accounts.CustomUser'
 MIDDLEWARE = [
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'accounts.middleware.LoginMiddlewareCheck',
 ]
 
 ROOT_URLCONF = 'TaskManagmentSystem.urls'

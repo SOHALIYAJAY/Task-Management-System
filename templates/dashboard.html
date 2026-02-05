@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,22 +13,21 @@
 <nav class="navbar">
     <div class="logo">TaskManager</div>
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="#">Dashboard</a></li>
-        <li><a href="{% url 'login'%}" class="btn-login">Login</a></li>
+        <li><a href="{% url 'profile' %}" >Profile</a></li>
     </ul>
 </nav>
 <div class="dashboard">
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <h2>TaskManager</h2>
+    <br>    
         <ul>
             <li class="active">Dashboard</li>
-            <li>My Tasks</li>
-            <li>Completed</li>
-            <li><a href="{% url 'profile' %}" id='profile'> Profile</a></li>
+            <li><a href="{% url 'mytask' %}"  id='mytask' >My Tasks</a></li>
+            <li><a href="{% url 'completetask' %}" id='completetask'>Complete Tasks</a></li>
             <li><a href="{% url 'userlogout' %}"  id='logout'>logout</a></li>
         </ul>
     </aside>
@@ -35,57 +35,98 @@
     <!-- Main Content -->
     <main class="main">
 
-        <!-- Top Navbar -->
-        <header class="topbar">
-            <h1>Dashboard</h1>
-            <button onclick="addTask()">+ Add Task</button>
-        </header>
+    <!-- Welcome -->
+    <section class="welcome">
+        <h1>Welcome back 👋 {{ user.name }} </h1>
+        <p>Here’s what’s happening with your tasks today.</p>
+    </section>
 
-        <!-- Stats Cards -->
-        <section class="stats">
-            <div class="card">
-                <h3>Total Tasks</h3>
-                <p id="total">5</p>
-            </div>
-            <div class="card">
-                <h3>Pending</h3>
-                <p id="pending">3</p>
-            </div>
-            <div class="card">
-                <h3>Completed</h3>
-                <p id="completed">2</p>
-            </div>
-        </section>
+    <!-- Stats Cards -->
+    <section class="stats">
+        <div class="card highlight">
+            <h3>Total Tasks</h3>
+            <p>{{ totaltask }}</p>
+        </div>
+        <div class="card">
+            <h3>Pending</h3>
+            <p class="pending">{{ pendingtask }}</p>
+        </div>
+        <div class="card">
+            <h3>Completed</h3>
+            <p class="completed">{{ completetask }}</p>
+        </div>
+    </section>
 
-        <!-- Task List -->
-        <section class="tasks">
-            <h2>Recent Tasks</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Task</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="taskTable">
-                    <tr>
-                        <td>Design Login Page</td>
-                        <td>High</td>
-                        <td class="pending">Pending</td>
-                    </tr>
-                    <tr>
-                        <td>Connect Django Backend</td>
-                        <td>Medium</td>
-                        <td class="completed">Completed</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <!-- Progress -->
+<section class="progress-box">
+    <h3>Task Progress</h3>
 
-    </main>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ progress }}%;"></div>
+    </div>
+
+    <small>{{ completetask }} of {{ totaltask }} tasks completed</small>
+</section>
+
+
+    <!-- Quick Actions -->
+    <section class="actions">
+        <a href="{% url 'taskcreate' %}" class="action-btn">➕ Add New Task</a>
+        <a href="{% url 'mytask' %}" class="action-btn secondary">📋 View All Tasks</a>
+    </section>
+
+    <!-- Recent Tasks -->
+    <section class="tasks">
+        <h2>Recent Tasks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in task %}
+                <tr>
+                    <td>{{ i.title }}</td>
+                    <td>
+                        <span class="pill {{ i.priority|lower }}">
+                            {{ i.priority }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="pill {{ i.status|lower }}">
+                            {{ i.status }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if i.due_date %}
+                            {{ i.due_date }}
+                        {% else %}
+                            No date
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align:center; padding:20px;">
+                        No tasks yet 🚀
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
 </div>
 
+<footer class="footer">
+    <p>© 2026 TaskManager | Built with Django ❤️</p>
+</footer>
 <script src="{% static 'js/dashboard.js' %}"></script>
 </body>
 </html>

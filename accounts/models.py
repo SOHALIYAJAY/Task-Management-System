@@ -4,9 +4,10 @@ from accounts.manager import CustomUserManager
 
 class CustomUser(AbstractUser):
     username=None
+    name=models.CharField(null=True,blank=True,max_length=15)
     email=models.EmailField(unique=True)
-    age=models.IntegerField(default=0)
     phone=models.CharField(max_length=10,null=True,blank=True)
+    userprofile=models.ImageField(upload_to='profile/',blank=True, null=True)
 
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=[]
