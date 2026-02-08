@@ -1,17 +1,4 @@
 
-/* Layout */
-.dashboard {
-    display: flex;
-    min-height: calc(100vh - 70px);
-}
-
-
-#logout, #profile, #mytask, #completetask {
-    color: #E5E7EB;
-    text-decoration: none;
-    font-weight: 500;
-}
-
 /* Sidebar */
 .sidebar {
     width: 220px;
@@ -165,4 +152,3 @@ th, td {
 
 .pill.pending { background: #fef3c7; color: #92400e; }
 
- 

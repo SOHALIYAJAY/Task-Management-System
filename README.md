@@ -1,11 +1,14 @@
-# TaskManagementSystem
+## TaskManagementSystem
 
-A Django-based Task Management System with user authentication.
+A Django-based Task Management System with user authentication and .
 
 ## Features
 - User login & registration
 - Profile management
-- Task CRUD
+- Add multiple tasks
+- Edit existing tasks
+- Delete tasks
+- Clean card UI with buttons
 
 ## Tech Stack
 - Python
@@ -17,3 +20,6 @@ A Django-based Task Management System with user authentication.
 2. pip install -r requirements.txt
 3. python manage.py migrate
 4. python manage.py runserver
+
+## Purpose
+Created to improve my understanding on Django and it's different topic ,improve the Focus on Authentication, and managing arrays of items in Django.
