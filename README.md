@@ -1,4 +1,4 @@
-<img width="1586" height="442" alt="image" src="https://github.com/user-attachments/assets/a632d20b-36b5-4283-8f29-e8b1d7e854f5" /># TaskManagementSystem
+## TaskManagementSystem
 
 A Django-based Task Management System with user authentication and .
 
