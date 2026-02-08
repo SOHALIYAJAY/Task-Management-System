@@ -1,79 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
 
-body {
-    background: #f4f6f8;
-}
-
+/* Layout */
 .dashboard {
     display: flex;
-    min-height: calc(100vh - 70px); /* subtract navbar height */
+    min-height: calc(100vh - 70px);
 }
 
 
-/* Navbar */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 16px 60px;
-
-     background: #0F172A;
-    backdrop-filter: blur(12px);
-
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #FACC15; /* Accent color */
-}
-
-.nav-links {
-    display: flex;
-    gap: 26px;
-    list-style: none;
-}
-
-.nav-links a {
+#logout, #profile, #mytask, #completetask {
     color: #E5E7EB;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #FACC15;
-}
-
-.btn-nav {
-    background: #FACC15;
-    color: #111827;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-nav:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(250, 204, 21, 0.4);
 }
 
 /* Sidebar */
 .sidebar {
     width: 220px;
-    background: #0F172A;   /* slate blue */
+    background: #0F172A;
     color: #e5e7eb;
     padding: 20px;
 }
@@ -99,7 +41,7 @@ body {
     background: #3b82f6;
 }
 
-/* Main */
+/* Main Content */
 .main {
     flex: 1;
     padding: 20px;
@@ -113,13 +55,29 @@ body {
     margin-bottom: 20px;
 }
 
-.topbar button {
+.topbar button,
+.action-btn {
     padding: 10px 15px;
     background: #3b82f6;
     border: none;
     color: white;
     border-radius: 6px;
     cursor: pointer;
+    font-weight: 600;
+}
+
+/* Welcome */
+.welcome {
+    margin-bottom: 20px;
+}
+
+.welcome h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.welcome p {
+    color: #6b7280;
 }
 
 /* Stats */
@@ -143,6 +101,32 @@ body {
     margin-top: 10px;
 }
 
+.card.highlight {
+    border-left: 6px solid #3b82f6;
+}
+
+/* Progress */
+.progress-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
 /* Tasks Table */
 .tasks {
     background: white;
@@ -162,85 +146,9 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-.pending {
-    color: orange;
-    font-weight: bold;
-}
-
-.completed {
-    color: green;
-    font-weight: bold;
-}
-
-#logout,#profile,#mytask,#completetask{
-    color: #ddd;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* Welcome */
-.welcome {
-    margin-bottom: 20px;
-}
-
-.welcome h1 {
-    font-size: 26px;
-    margin-bottom: 6px;
-}
-
-.welcome p {
-    color: #6b7280;
-}
-
-/* Highlight card */
-.card.highlight {
-    border-left: 6px solid #3b82f6;
-}
-
-/* Progress */
-.progress-box {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-}
-
-.progress-bar {
-    width: 100%;
-    height: 12px;
-    background: #e5e7eb;
-    border-radius: 10px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #2563eb);
-    border-radius: 10px;
-}
-
-/* Actions */
-.actions {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.action-btn {
-    padding: 12px 18px;
-    background: #3b82f6;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.action-btn.secondary {
-    background: #e5e7eb;
-    color: #111827;
-}
+/* Status */
+.pending { color: orange; font-weight: bold; }
+.completed { color: green; font-weight: bold; }
 
 /* Pills */
 .pill {
@@ -252,15 +160,9 @@ th, td {
 
 .pill.high { background: #fee2e2; color: #991b1b; }
 .pill.medium { background: #fef3c7; color: #92400e; }
-.pill.low { background: #dcfce7; color: #166534; }
-
+.pill.low,
 .pill.completed { background: #dcfce7; color: #166534; }
+
 .pill.pending { background: #fef3c7; color: #92400e; }
 
-/* Footer */
-.footer {
-    background: #0F172A;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+ 

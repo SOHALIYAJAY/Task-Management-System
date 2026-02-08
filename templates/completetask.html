@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Pending Tasks</title>
+    <link rel="stylesheet" href="{% static 'css/navbar-footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/completetask.css' %}">
+
 </head>
 <body>
 
@@ -14,7 +16,7 @@
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'profile' %}">profile</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
     </ul>
 </nav>
 
