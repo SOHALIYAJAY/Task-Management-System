@@ -8,17 +8,8 @@
     <link rel="stylesheet" href="{% static 'css/navbar-footer.css' %}">
 </head>
 <body>
+    {% include 'header.html' %}
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="logo">TaskManager</div>
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'profile' %}" >Profile</a></li>
-    </ul>
-</nav>
 {% if messages %}
   <div class="message-container">
     {% for message in messages %}
@@ -68,10 +59,4 @@
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 TaskManager | Built with Django ❤️</p>
-</footer>
-
-</body>
-</html>
+{% include 'footer.html' %}

@@ -1,133 +1,102 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard | Task Manager</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <title>Dashboard | TaskManager</title>
+
+    <!-- COMMON -->
     <link rel="stylesheet" href="{% static 'css/navbar-footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 <body>
+{% include 'header.html' %}
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="logo">TaskManager</div>
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="{% url 'profile' %}" >Profile</a></li>
-    </ul>
-</nav>
-<div class="dashboard">
+<div class="layout">
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
-    <br>    
         <ul>
             <li class="active">Dashboard</li>
-            <li><a href="{% url 'mytask' %}"  id='mytask' >My Tasks</a></li>
-            <li><a href="{% url 'completetask' %}" id='completetask'>Complete Tasks</a></li>
-            <li><a href="{% url 'userlogout' %}"  id='logout'>logout</a></li>
+            <li><a href="{% url 'mytask' %}">My Tasks</a></li>
+            <li><a href="{% url 'completetask' %}">Completed Tasks</a></li>
+            <li><a href="{% url 'userlogout' %}">Logout</a></li>
         </ul>
     </aside>
 
-    <!-- Main Content -->
+    <!-- MAIN -->
     <main class="main">
 
-    <!-- Welcome -->
-    <section class="welcome">
-        <h1>Welcome back 👋 {{ user.name }} </h1>
-        <p>Here’s what’s happening with your tasks today.</p>
-    </section>
+        <!-- WELCOME -->
+        <section class="welcome">
+            <h1>Welcome back 👋 {{ user.name }}</h1>
+            <p>Here’s what’s happening with your tasks today.</p>
+        </section>
 
-    <!-- Stats Cards -->
-    <section class="stats">
-        <div class="card highlight">
-            <h3>Total Tasks</h3>
-            <p>{{ totaltask }}</p>
-        </div>
-        <div class="card">
-            <h3>Pending</h3>
-            <p class="pending">{{ pendingtask }}</p>
-        </div>
-        <div class="card">
-            <h3>Completed</h3>
-            <p class="completed">{{ completetask }}</p>
-        </div>
-    </section>
+        <!-- STATS -->
+        <section class="stats">
+            <div class="card highlight">
+                <h3>Total Tasks</h3>
+                <p>{{ totaltask }}</p>
+            </div>
+            <div class="card">
+                <h3>Pending</h3>
+                <p class="pending">{{ pendingtask }}</p>
+            </div>
+            <div class="card">
+                <h3>Completed</h3>
+                <p class="completed">{{ completetask }}</p>
+            </div>
+        </section>
 
-    <!-- Progress -->
-<section class="progress-box">
-    <h3>Task Progress</h3>
+        <!-- PROGRESS -->
+        <section class="progress-box">
+            <h3>Task Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ progress }}%;"></div>
+            </div>
+            <small>{{ completetask }} of {{ totaltask }} tasks completed</small>
+        </section>
 
-    <div class="progress-bar">
-        <div class="progress-fill" style="width: {{ progress }}%;"></div>
-    </div>
+        <!-- ACTIONS -->
+        <section class="actions">
+            <a href="{% url 'taskcreate' %}" class="action-btn">➕ Add New Task</a>
+            <a href="{% url 'mytask' %}" class="action-btn secondary">📋 View All Tasks</a>
+        </section>
 
-    <small>{{ completetask }} of {{ totaltask }} tasks completed</small>
-</section>
+        <!-- TASKS -->
+        <section class="tasks">
+            <h2>Recent Tasks</h2>
 
-
-    <!-- Quick Actions -->
-    <section class="actions">
-        <a href="{% url 'taskcreate' %}" class="action-btn">➕ Add New Task</a>
-        <a href="{% url 'mytask' %}" class="action-btn secondary">📋 View All Tasks</a>
-    </section>
-
-    <!-- Recent Tasks -->
-    <section class="tasks">
-        <h2>Recent Tasks</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Due Date</th>
-                </tr>
-            </thead>
-            <tbody>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for i in task %}
-                <tr>
-                    <td>{{ i.title }}</td>
-                    <td>
-                        <span class="pill {{ i.priority|lower }}">
-                            {{ i.priority }}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="pill {{ i.status|lower }}">
-                            {{ i.status }}
-                        </span>
-                    </td>
-                    <td>
-                        {% if i.due_date %}
-                            {{ i.due_date }}
-                        {% else %}
-                            No date
-                        {% endif %}
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ i.title }}</td>
+                        <td><span class="pill {{ i.priority|lower }}">{{ i.priority }}</span></td>
+                        <td><span class="pill {{ i.status|lower }}">{{ i.status }}</span></td>
+                        <td>{{ i.due_date|default:"No date" }}</td>
+                    </tr>
                 {% empty %}
-                <tr>
-                    <td colspan="4" style="text-align:center; padding:20px;">
-                        No tasks yet 🚀
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="4" class="empty">No tasks yet 🚀</td>
+                    </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-    </section>
+                </tbody>
+            </table>
+        </section>
 
-</main>
-
+    </main>
 </div>
 
-<footer class="footer">
-    <p>© 2026 TaskManager | Built with Django ❤️</p>
-</footer>
-<script src="{% static 'js/dashboard.js' %}"></script>
-</body>
-</html>
+{% include 'footer.html' %}
+
+<script src="{static 'js/dashboard.js' }"></script>

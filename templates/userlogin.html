@@ -12,16 +12,7 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">TaskManager</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-        </ul>
-    </nav>
-
+    {% include 'header.html' %}
     <div class="login-container">
         <h2>User Login</h2>
 
@@ -39,5 +30,4 @@
 
     <!-- JS -->
     <script src="{% static 'js/login.js' %}"></script>
-</body>
-</html>
+    {% include 'footer.html' %}

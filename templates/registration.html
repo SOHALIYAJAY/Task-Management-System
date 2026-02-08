@@ -9,15 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/navbar-footer.css' %}">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">TaskManager</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-        </ul>
-    </nav>
+    {% include 'header.html' %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}    
@@ -28,5 +20,4 @@
     </p>
 
     <script src="{% static 'js/registration.js' %}"></script>
-</body>
-</html>
+{% include 'footer.html' %}

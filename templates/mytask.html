@@ -10,14 +10,7 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-    <div class="logo">TaskManager</div>
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'taskcreate' %}">Create Task</a></li>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-    </ul>
-</nav>
+{% include 'header.html' %}
 <br><br><br><br><br><br><br><br>
 <main class="page">
 <section class="task-wrapper">
@@ -105,9 +98,5 @@
 </main>
 <br><br><br><br><br>
 
-<footer class="footer">
-    <p>© 2026 TaskManager | Built with Django ❤️</p>
-</footer>
 <script src="{% static 'js/mytask.js' %}"></script>
-</body>
-</html>
+{% include 'footer.html' %}

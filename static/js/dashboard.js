@@ -1,30 +1,57 @@
-let total = 5;
-let pending = 3;
-let completed = 2;
+document.addEventListener("DOMContentLoaded", () => {
 
-function addTask() {
-    const taskName = prompt("Enter task name:");
-    if (!taskName) return;
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const currentPath = window.location.pathname;
 
-    const table = document.getElementById("taskTable");
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+        }
+    });
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
-        <td>${taskName}</td>
-        <td>Low</td>
-        <td class="pending">Pending</td>
-    `;
+    const sidebarLinks = document.querySelectorAll(".sidebar a");
 
-    table.appendChild(row);
+    sidebarLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPath) {
+            link.parentElement.classList.add("active");
+        }
+    });
 
-    total++;
-    pending++;
 
-    updateStats();
-}
+    const progressFill = document.querySelector(".progress-fill");
 
-function updateStats() {
-    document.getElementById("total").innerText = total;
-    document.getElementById("pending").innerText = pending;
-    document.getElementById("completed").innerText = completed;
-}
+    if (progressFill) {
+        const targetWidth = progressFill.style.width;
+        progressFill.style.width = "0%";
+
+        setTimeout(() => {
+            progressFill.style.transition = "width 1s ease-in-out";
+            progressFill.style.width = targetWidth;
+        }, 200);
+    }
+
+
+    const alerts = document.querySelectorAll(".alert");
+
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            alert.style.opacity = "0";
+            alert.style.transform = "translateY(-10px)";
+            setTimeout(() => alert.remove(), 500);
+        }, 4000);
+    });
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        card.addEventListener("mouseenter", () => {
+            card.style.transform = "translateY(-4px)";
+            card.style.transition = "0.2s ease";
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "translateY(0)";
+        });
+    });
+
+});

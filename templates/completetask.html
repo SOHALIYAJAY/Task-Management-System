@@ -9,16 +9,7 @@
 
 </head>
 <body>
-
-<nav class="navbar">
-    <div class="logo">TaskManager</div>
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'taskcreate' %}">Tasks</a></li>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-    </ul>
-</nav>
+{% include 'header.html' %}
 
 <section class="page">
     <h2>🕒 Pending Tasks</h2>
@@ -43,8 +34,4 @@
     </div>
 </section>
 <br><br><br><br><br>
-<footer class="footer">
-    <p>© 2026 TaskManager | Built with Django ❤️</p>
-</footer>
-</body>
-</html>
+{% include 'footer.html' %}
